@@ -1,22 +1,8 @@
-export const setBaseURL = () => {
-  if (window) {
-    let newHost = prompt('Masukkan URL Web Server:');
+const DEFAULT_BASE_URL = 'http://localhost:5000/';
 
-    if (!newHost) {
-      return;
-    }
-
-    if (!newHost.startsWith('http://')) {
-      newHost = `http://${newHost}`;
-    }
-
-    if (newHost[newHost.length - 1] !== '/') {
-      newHost += '/';
-    }
-
-    localStorage.setItem('BASE_URL', newHost);
-    window.location.reload();
-  }
+const getBaseURL = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL || DEFAULT_BASE_URL;
+  return baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
 };
 
-export const getBaseURL = () => localStorage.getItem('BASE_URL') || '';
+export default getBaseURL;

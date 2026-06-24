@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
 import styles from './AnnounceBar.module.scss';
-import { getBaseURL, setBaseURL } from '../../../lib/utils/storage';
+import getBaseURL from '../../../lib/utils/storage';
 
 class AnnounceBar extends Component {
   constructor(props) {
@@ -30,11 +30,6 @@ class AnnounceBar extends Component {
           >
             {host}
           </Link>
-          {' '}
-          |
-          {' '}
-          <button type="button" onClick={setBaseURL}>Change URL</button>
-
         </p>
       </div>
     );

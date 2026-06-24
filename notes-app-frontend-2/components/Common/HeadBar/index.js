@@ -3,7 +3,7 @@ import Link from 'next/link';
 import jwtDecode from 'jwt-decode';
 import styles from './HeadBar.module.scss';
 import fetcher from '../../../lib/utils/fetcher';
-import { getBaseURL } from '../../../lib/utils/storage';
+import getBaseURL from '../../../lib/utils/storage';
 
 class HeadBar extends Component {
   constructor(props) {
@@ -18,7 +18,7 @@ class HeadBar extends Component {
       try {
         const accessToken = localStorage.getItem('accessToken');
         const { id: userId } = jwtDecode(accessToken);
-        const { data: { user } } = await fetcher(`${getBaseURL()}users/${userId}`);
+        const { data: user } = await fetcher(`${getBaseURL()}users/${userId}`);
         this.setState((prevState) => ({ ...prevState, user }));
       } catch {
         // doing nothing

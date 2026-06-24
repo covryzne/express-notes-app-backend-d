@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Router from 'next/router';
 import fetcher from '../../lib/utils/fetcher';
-import { getBaseURL } from '../../lib/utils/storage';
+import getBaseURL from '../../lib/utils/storage';
 
 class Logout extends Component {
   async componentDidMount() {

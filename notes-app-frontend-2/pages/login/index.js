@@ -4,7 +4,7 @@ import Router from 'next/router';
 import Link from 'next/link';
 import styles from './Login.module.scss';
 import fetcher from '../../lib/utils/fetcher';
-import { getBaseURL } from '../../lib/utils/storage';
+import getBaseURL from '../../lib/utils/storage';
 import AnnounceBar from '../../components/Common/AnnounceBar';
 
 export default class Login extends Component {

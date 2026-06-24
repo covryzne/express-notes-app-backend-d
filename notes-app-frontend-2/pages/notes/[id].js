@@ -6,7 +6,7 @@ import Router from 'next/router';
 import styles from './Note.module.scss';
 import FloatingButton from '../../components/Common/FloatingButton';
 import AnnounceBar from '../../components/Common/AnnounceBar';
-import { getBaseURL } from '../../lib/utils/storage';
+import getBaseURL from '../../lib/utils/storage';
 import { convertISODate } from '../../lib/utils/date';
 import { fetchWithAuthentication } from '../../lib/utils/fetcher';
 
@@ -31,7 +31,7 @@ class Note extends Component {
 
     try {
       const { id } = this.props;
-      const { data: { note } } = await fetchWithAuthentication(`${getBaseURL()}notes/${id}`);
+      const { data: note } = await fetchWithAuthentication(`${getBaseURL()}notes/${id}`);
       this.setState((prevState) => ({ ...prevState, note, accessToken }));
     } catch (error) {
       this.setState((prevState) => ({ ...prevState, isError: true }));
@@ -56,7 +56,13 @@ class Note extends Component {
   renderSuccess() {
     const { note, accessToken } = this.state;
     const {
-      id, title, body, createdAt, updatedAt, tags, username = 'undefined',
+      id,
+      title,
+      body,
+      created_at: createdAt,
+      updated_at: updatedAt,
+      tags = [],
+      username = 'undefined',
     } = note;
 
     if (!accessToken) {

@@ -5,7 +5,7 @@ import ContentEditable from 'react-contenteditable';
 import Router from 'next/router';
 import styles from './New.module.scss';
 import AnnounceBar from '../../components/Common/AnnounceBar';
-import { getBaseURL } from '../../lib/utils/storage';
+import getBaseURL from '../../lib/utils/storage';
 import { fetchWithAuthentication } from '../../lib/utils/fetcher';
 import AuthenticationError from '../../lib/utils/AuthenticationError';
 

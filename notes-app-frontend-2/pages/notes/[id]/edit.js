@@ -6,7 +6,7 @@ import Router from 'next/router';
 import Autosuggest from 'react-autosuggest';
 import AnnounceBar from '../../../components/Common/AnnounceBar';
 import styles from './Edit.module.scss';
-import { getBaseURL } from '../../../lib/utils/storage';
+import getBaseURL from '../../../lib/utils/storage';
 import fetcher, { fetchWithAuthentication } from '../../../lib/utils/fetcher';
 import AuthenticationError from '../../../lib/utils/AuthenticationError';
 
@@ -53,7 +53,7 @@ class Edit extends Component {
 
     try {
       const { id } = this.props;
-      const { data: { note } } = await fetchWithAuthentication(`${getBaseURL()}notes/${id}`);
+      const { data: note } = await fetchWithAuthentication(`${getBaseURL()}notes/${id}`);
       const { title, body, tags } = note;
 
       this.setState((prevState) => ({
@@ -222,7 +222,7 @@ class Edit extends Component {
     }
 
     try {
-      const { data: { users } } = await fetcher(`${getBaseURL()}users?username=${value}`);
+      const { data: users } = await fetcher(`${getBaseURL()}users?username=${value}`);
       return users;
     } catch (error) {
       return [];

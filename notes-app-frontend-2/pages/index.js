@@ -7,7 +7,7 @@ import Notes from '../components/Notes';
 import FloatingButton from '../components/Common/FloatingButton';
 
 import styles from './Home.module.scss';
-import { getBaseURL } from '../lib/utils/storage';
+import getBaseURL from '../lib/utils/storage';
 import { fetchWithAuthentication } from '../lib/utils/fetcher';
 import AuthenticationError from '../lib/utils/AuthenticationError';
 
@@ -44,7 +44,7 @@ class Home extends Component {
 
   async _fetch() {
     try {
-      const { data: { notes } } = await fetchWithAuthentication(`${getBaseURL()}notes`);
+      const { data: notes } = await fetchWithAuthentication(`${getBaseURL()}notes`);
       this.setState(() => ({ notes, empty: notes.length < 1 }));
     } catch (error) {
       if (error instanceof AuthenticationError) {

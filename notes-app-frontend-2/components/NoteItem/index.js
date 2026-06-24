@@ -20,7 +20,7 @@ class NoteItem extends Component {
   render() {
     const { note } = this.props;
     const {
-      title, tags, body, createdAt, updatedAt,
+      title, tags = [], body, created_at: createdAt, updated_at: updatedAt,
     } = note;
 
     return (

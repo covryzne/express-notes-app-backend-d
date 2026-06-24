@@ -1,4 +1,4 @@
-import { getBaseURL } from './storage';
+import getBaseURL from './storage';
 import AuthenticationError from './AuthenticationError';
 
 const fetcher = async (url, options) => {
