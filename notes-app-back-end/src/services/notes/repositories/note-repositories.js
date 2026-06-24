@@ -23,7 +23,10 @@ class NoteRepositories {
 
   async getNotes(owner) {
     const query = {
-      text: 'SELECT * FROM notes WHERE owner = $1',
+      text: `SELECT DISTINCT notes.id, notes.title, notes.tags, notes.body
+             FROM notes
+             LEFT JOIN collaborations ON collaborations.note_id = notes.id
+             WHERE notes.owner = $1 OR collaborations.user_id = $1`,
       values: [owner],
     };
 
@@ -34,7 +37,10 @@ class NoteRepositories {
 
   async getNoteById(id) {
     const query = {
-      text: 'SELECT * FROM notes WHERE id = $1',
+      text: `SELECT notes.id, notes.title, notes.tags, notes.body, users.username
+             FROM notes
+             LEFT JOIN users ON users.id = notes.owner
+             WHERE notes.id = $1`,
       values: [id],
     };
 
@@ -99,9 +105,9 @@ class NoteRepositories {
       values: [noteId, userId],
     };
 
-    await this.pool.query(query);
+    const result = await this.pool.query(query);
 
-    return false;
+    return result.rows.length > 0;
   }
 }
 

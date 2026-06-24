@@ -18,7 +18,7 @@ export const addCollaboration = async (req, res, next) => {
     return next(new InvariantError('Kolaborasi gagal ditambahkan'));
   }
 
-  return response(res, 201, 'Kolaborasi berhasil ditambahkan', collaboration);
+  return response(res, 201, 'Kolaborasi berhasil ditambahkan', { collaborationId: collaboration });
 };
 
 export const deleteCollaboration = async (req, res, next) => {

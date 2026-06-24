@@ -9,8 +9,13 @@ const router = Router();
 // Public route - Register user
 router.post('/', validate(userPayloadSchema), createUser);
 router.get('/:id', getUserById);
-router.get('/', getUserByUsername);
-router.get('/', getUsers);
+router.get('/', (req, res, next) => {
+  if (req.query.username) {
+    return getUserByUsername(req, res, next);
+  }
+
+  return getUsers(req, res, next);
+});
 
 // Protected routes - Require authentication
 router.put('/:id', authenticateToken, validate(userUpdatePayloadSchema), editUser);
